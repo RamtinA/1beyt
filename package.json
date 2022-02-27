@@ -1,0 +1,15 @@
+{
+  "name": "1beyt",
+  "version": "1.0.0",
+  "description": "1beyt shows only one line of poem everytime",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RamtinA",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "cors": "^2.8.5"
+  }
+}
