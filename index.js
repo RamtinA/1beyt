@@ -1,4 +1,4 @@
-// Elements Variables
+// Elements
 const logoEl = document.getElementById("logo");
 const headerBeforeEl = document.querySelector(".logo-before");
 const headerTextEl = document.querySelector(".logo-text");
@@ -6,10 +6,10 @@ const headerAfterEl = document.querySelector(".logo-after");
 const m1El = document.getElementById("m1");
 const m1E2 = document.getElementById("m2");
 const poetEl = document.getElementById("poet");
+const poetSelectorEl = document.getElementById("poet_selector");
 
 let poem = {};
 let titlePrefix = "یک بیت";
-
 let gettingNewPoem = false;
 // Start ---- set GSAP timelines
 let startupTimeline = gsap.timeline();
@@ -43,11 +43,11 @@ const onLogoLeave = (event) => {
 };
 const onLogoClick = (event) => {
   event.preventDefault();
-  if(!gettingNewPoem){
+  if (!gettingNewPoem) {
     gettingNewPoem = true;
     hidePoems();
-    setTimeout(getPoem,500);
-    setTimeout(revealPoems,1000);
+    setTimeout(getPoem, 500);
+    setTimeout(revealPoems, 1000);
   }
 };
 logoEl.addEventListener("mouseenter", onLogoHover);
@@ -70,50 +70,45 @@ const setPoem = () => {
   m1.innerHTML = poem.m1;
   m2.innerHTML = poem.m2;
   poet.innerHTML = poem.poet;
-  poet.setAttribute("href",poem.url)
+  poet.setAttribute("href", poem.url)
 };
 
 
-const getPoem = () => {
-  const url = "./data.php";
-  // Make a request for a user with a given ID
-  axios
-    .get(url,
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
+const getPoem = async () => {
 
-        },
-        responseType: "json",
-      })
-    .then(function (response) {
-      // handle success
+  const url = `http://c.ganjoor.net/beyt-xml.php?n=1${poetSelectorEl.value > 0 ? `&p=${poetSelectorEl.value}` : ''}`;
+  // Make a request for a user with a given ID
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(xmlText => {
+      const parser = new DOMParser();
+      const xmlResult = parser.parseFromString(xmlText,
+        'text/xml');
       poem = {
-        m1: response.data.m1,
-        m2: response.data.m2,
-        poet: response.data.poet,
-        url: response.data.url,
+        m1: xmlResult.getElementsByTagName('m1')
+        [0].textContent,
+        m2: xmlResult.getElementsByTagName('m2')
+        [0].textContent,
+        poet: xmlResult.getElementsByTagName('poet')
+        [0].textContent,
+        url: xmlResult.getElementsByTagName('url')
+        [0].textContent,
       };
       document.title = "یک بیت شعر از " + poem.poet;
       setPoem();
     })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
+    .catch(error => {
+      console.error(`There was a problem with
+                       the fetch operation:`, error);
     });
+
 };
-
-
 
 getPoem();
 
-
-
-
-
-
-setTimeout(onLogoHover,10000)
+setTimeout(onLogoHover, 10000)

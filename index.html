@@ -1,265 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-28218971-5"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>یک بیت</title>
 
-      gtag("config", "UA-28218971-5");
-    </script>
+  <link rel="preconnect" href="//fdn.fontcdn.ir">
+  <link rel="preconnect" href="//v1.fontapi.ir">
+  <link href="https://v1.fontapi.ir/css/Estedad" rel="stylesheet">
 
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>یک بیت</title>
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
+  <style>
+    body {
+      margin: 0;
+      background-image: linear-gradient(to bottom, #20cfbe, #009c8d);
 
-    <link rel="preconnect" href="//fdn.fontcdn.ir" />
-    <link rel="preconnect" href="//v1.fontapi.ir" />
-    <link href="https://v1.fontapi.ir/css/Estedad" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
-    <style>
-      body {
-        margin: 0;
+      font-family: "Estedad", sans-serif;
+    }
 
-        font-family: "Estedad", sans-serif;
-      }
+    ::selection {
+      background-color: white;
+      color: #009c8d;
+      text-shadow: 0px 0px 0px white;
+    }
 
-      ::selection {
-        background-color: white;
-        color: #009c8d;
-        text-shadow: 0px 0px 0px white;
-      }
+    html {
+      font-size: 16px;
+    }
+
+    .App {
+      text-align: center;
+      margin: 0 auto;
+      padding: 0;
+      direction: rtl;
+    }
+
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    main {
+      margin: 0 auto;
+      display: flex;
+      align-items: space-around;
+      flex-direction: column;
+      width: 48vw;
+      overflow: hidden;
+    }
+
+    .m1,
+    .m2 {
+      margin: 1rem;
+      font-size: 2rem;
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 0px 3px#007065;
+    }
+
+    .m1 {
+      align-self: flex-start;
+    }
+
+    .m2,
+    #poet {
+      align-self: flex-end;
+    }
+
+    #poet:link {
+      margin: 0 1rem;
+      padding: 0;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #003530;
+    }
+
+    header {
+      padding-top: 1rem;
+      user-select: none;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      color: #003530;
+    }
+
+    .heart-symbol {
+      color: rgb(102, 0, 0);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:link {
+      color: #0e1111;
+    }
+
+    a:visited {
+      color: #0e1111;
+    }
+
+    .sidebar {
+      position: absolute;
+      display: inline-block;
+      width: 25%;
+    }
+
+    .sidebar img {
+      max-height: 100vh;
+      user-select: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .sidebar-left {
+      bottom: 0;
+      left: 0;
+      text-align: left;
+    }
+
+    .sidebar-right {
+      right: 0;
+      top: 0;
+      text-align: right;
+    }
+
+    #logo {
+      padding: 0.1rem 1rem;
+      border-radius: 0.5rem;
+      color: #008174;
+      font-weight: 900;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 1px #84ebe0;
+      transition: all ease-in-out 0.2s;
+    }
+
+    .logo-text:hover {
+      color: #005048;
+      text-shadow: 1px 1px 1px #bef1ec;
+    }
+
+    .logo-before,
+    .logo-after,
+    .logo-text {
+      position: absolute;
+      transition: all ease-in-out 0.4s;
+    }
+
+    .logo-before {
+      top: 3.9rem;
+      right: 0;
+    }
+
+    .logo-text {
+      transition: all linear 0.18s;
+      right: 5%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .logo-text-hover {
+      right: 8%;
+    }
+
+    .logo-after {
+      top: 3.9rem;
+      left: 0;
+    }
+
+    .logo-hover {
+      top: 0;
+    }
+
+    h1 {
+      position: relative;
+      display: inline-box;
+      width: 25.5rem;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    #poet_selector{
+      margin-top: 30px;
+    }
+    .select-wrapper {
+  position: relative;
+  font-family: Arial;
+}
+
+    @media only screen and (max-width: 650px) {
       html {
-        font-size: 16px;
-      }
-      .App {
-        text-align: center;
-        background-image: linear-gradient(to bottom, #20cfbe, #009c8d);
-        margin: 0 auto;
-        padding: 0;
-        direction: rtl;
+        font-size: 12px;
       }
 
-      .wrapper {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      main {
-        margin: 0 auto;
-        display: flex;
-        align-items: space-around;
-        flex-direction: column;
-        width: 48vw;
-        overflow: hidden;
-      }
-      .m1,
-      .m2 {
-        margin: 1rem;
-        font-size: 2rem;
-        color: white;
-        font-weight: bold;
-        text-shadow: 1px 0px 3px#007065;
-      }
-      .m1 {
-        align-self: flex-start;
-      }
-      .m2,
-      #poet {
-        align-self: flex-end;
-      }
-      #poet:link {
-        margin: 0 1rem;
-        padding: 0;
-        font-weight: bold;
-        font-size: 1rem;
-        color: #003530;
-      }
-
-      header {
-        padding-top: 1rem;
-        user-select: none;
-      }
-      footer {
-        position: relative;
-        z-index: 1;
-        color: #003530;
-      }
-      .heart-symbol {
-        color: rgb(102, 0, 0);
-      }
-      a {
-        text-decoration: none;
-      }
-      a:link {
-        color: #0e1111;
-      }
-      a:visited {
-        color: #0e1111;
-      }
-      .sidebar {
-        position: absolute;
-        display: inline-block;
-        width: 25%;
-      }
       .sidebar img {
-        max-height: 100vh;
-        user-select: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -o-user-select: none;
-        user-select: none;
-        pointer-events: none;
+        display: none;
       }
-      .sidebar-left {
+
+      .sidebar-left img {
+        display: block;
+        position: absolute;
+        z-index: 0;
+        opacity: 0.3;
+        width: 100vw;
         bottom: 0;
         left: 0;
-        text-align: left;
-      }
-      .sidebar-right {
-        right: 0;
-        top: 0;
-        text-align: right;
       }
 
-
-      #logo {
-        padding: 0.1rem 1rem;
-        border-radius: 0.5rem;
-        color: #008174;
-        font-weight: 900;
-        font-size: 2.5rem;
-        text-shadow: 1px 1px 1px #84ebe0;
-        transition: all ease-in-out 0.2s;
-      }
-      .logo-text:hover {
-        color: #005048;
-        text-shadow: 1px 1px 1px #bef1ec;
-      }
-      .logo-before,
-      .logo-after,
-      .logo-text {
-        position: absolute;
-        transition: all ease-in-out 0.4s;
-      }
-      .logo-before {
-        top: 3.9rem;
-        right: 0;
-      }
-      .logo-text {
-        transition: all linear 0.18s;
-        right: 5%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-      .logo-text-hover {
-        right: 8%;
-      }
-      .logo-after {
-        top: 3.9rem;
-        left: 0;
+      main {
+        width: 90%;
       }
 
-      .logo-hover {
-        top: 0;
-      }
-      h1 {
-        position: relative;
-        display: inline-box;
-        width: 25.5rem;
-        margin: 0 auto;
-        overflow: hidden;
-      }
-      @media only screen and (max-width: 650px) {
-        html {
-          font-size: 12px;
-        }
-
-        .sidebar img {
-          display: none;
-        }
-        .sidebar-left img{
-          display: block;
-          position: absolute;
-          z-index: 0;
-          opacity: 0.3;
-          width: 100vw;
-          bottom: -50px;
-          left: 0;
-        }
-        main {
-          width: 90%;
-        }
-        .m1,
-        .m2,
-        .poet {
-          align-self: center;
-        }
-        .poet {
-          font-size: 1.4rem;
-        }
-        footer {
-          font-size: 1.3rem;
-          padding: 0rem 2rem;
-        }
-        header,main,footer{
-          z-index: 1;
-        }
+      .m1,
+      .m2,
+      .poet {
+        align-self: center;
       }
 
-    </style>
-  </head>
+      .poet {
+        font-size: 1.4rem;
+      }
 
-  <body>
-    <div class="App">
-      <div class="App__inner">
-        <div class="wrapper">
-          <header>
-            <h1>
-              <a id="logo" href="#">
-                <span class="logo-before">نمایش</span>
-                <span class="logo-text">یــک بیــت</span>
-                <span class="logo-after">دیگر</span>
-              </a>
-            </h1>
-          </header>
-          <div class="sidebar sidebar-left">
-            <img alt="" src="./assets/img/bg.svg" draggable="false" />
+      footer {
+        font-size: 1.3rem;
+        padding: 0rem 2rem;
+      }
+
+      header,
+      main,
+      footer {
+        z-index: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="App">
+    <div class="App__inner">
+      <div class="wrapper">
+        <header>
+          <h1>
+            <a id="logo" href="#">
+              <span class="logo-before">نمایش</span>
+              <span class="logo-text">یــک بیــت</span>
+              <span class="logo-after">دیگر</span>
+            </a>
+          </h1>
+          <div class="select-wrapper">
+            <select id="poet_selector">
+              <option value="0">تصادفی</option>
+              <option value="2">حافظ</option>
+              <option value="3">خیام</option>
+              <option value="26">ابوسعید ابوالخیر</option>
+              <option value="22">صائب</option>
+              <option value="28">باباطاهر</option>
+              <option value="5">مولوی</option>
+              <option value="19">اوحدی</option>
+              <option value="20">خواجو</option>
+              <option value="35">شهریار</option>
+              <option value="21">عراقی</option>
+              <option value="32">فروغی بسطامی</option>
+              <option value="40">سلمان ساوجی</option>
+              <option value="29">محتشم کاشانی</option>
+              <option value="34">امیرخسرو دهلوی</option>
+              <option value="31">سیف فرغانی</option>
+              <option value="33">عبید زاکانی</option>
+              <option value="25">هاتف اصفهانی</option>
+              <option value="41">رهی معیری</option>
+            </select>
           </div>
 
-          <main>
-            <div id="m1" class="m1"></div>
-            <div id="m2" class="m2"></div>
-            <div>
-              <a id="poet" href="#"></a>
-            </div>
-          </main>
-          <div class="sidebar sidebar-right">
-            <img alt="" src="./assets/img/bg-reverse.svg" draggable="false" />
-          </div>
-          <footer>
-            <p>
-              ساخته شده با <span class="heart-symbol">&#9829;</span> توسط
-              <a href="https://github.com/RamtinA">ramtina</a> قدرت گرفته از
-              وبسایت <a href="https://ganjoor.net/">گنجور</a>
-            </p>
-          </footer>
+        </header>
+        <div class="sidebar sidebar-left">
+          <img alt="" src="./assets/img/bg.svg" draggable="false" />
         </div>
+
+        <main>
+          <div id="m1" class="m1"></div>
+          <div id="m2" class="m2"></div>
+          <div>
+            <a id="poet" href="#"></a>
+          </div>
+        </main>
+        <div class="sidebar sidebar-right">
+          <img alt="" src="./assets/img/bg-reverse.svg" draggable="false" />
+        </div>
+        <footer>
+          <p>
+            ساخته شده با <span class="heart-symbol">&#9829;</span> توسط
+            <a href="https://github.com/RamtinA">ramtina</a> قدرت گرفته از
+            وبسایت <a href="https://ganjoor.net/">گنجور</a>
+          </p>
+        </footer>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./index.js"></script>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="./index.js"></script>
+</body>
+
 </html>
