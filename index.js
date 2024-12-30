@@ -10,7 +10,6 @@ const poetSelectorEl = document.getElementById("poet_selector");
 
 let poem = {};
 let titlePrefix = "یک بیت";
-let gettingNewPoem = false;
 // Start ---- set GSAP timelines
 let startupTimeline = gsap.timeline();
 
@@ -22,9 +21,9 @@ startupTimeline.from("header", {
 });
 startupTimeline.from(".sidebar", { opacity: 0, duration: 1 });
 startupTimeline.from("header", { duration: 2, y: 300, ease: "slow" });
-startupTimeline.from("#m1", { x: 100, duration: 1, opacity: 0 });
-startupTimeline.from("#m2", { x: -100, duration: 1, opacity: 0 }, "<0");
-startupTimeline.from("#poet", { opacity: 0 }, ">0.5");
+startupTimeline.from(".ganjoor-m1", { x: 100, duration: 1, opacity: 0 });
+startupTimeline.from(".ganjoor-m2", { x: -100, duration: 1, opacity: 0 }, "<0");
+startupTimeline.from(".ganjoor-poet", { opacity: 0 }, ">0.5");
 startupTimeline.from("footer", { opacity: 0, delay: 1, duration: 1 });
 
 // End ---- GSAP timelines
@@ -43,12 +42,8 @@ const onLogoLeave = (event) => {
 };
 const onLogoClick = (event) => {
   event.preventDefault();
-  if (!gettingNewPoem) {
-    gettingNewPoem = true;
-    hidePoems();
-    setTimeout(getPoem, 500);
-    setTimeout(revealPoems, 1000);
-  }
+  hidePoems();
+  setTimeout(()=>{window.location.reload()}, 500)
 };
 logoEl.addEventListener("mouseenter", onLogoHover);
 logoEl.addEventListener("mouseout", onLogoLeave);
@@ -56,15 +51,14 @@ logoEl.addEventListener("click", onLogoClick);
 // EventHandlers ---- End
 
 const revealPoems = () => {
-  gsap.to("#m1", { opacity: 1 });
-  gsap.to("#m2", { opacity: 1 });
-  gsap.to("#poet", { opacity: 1 });
-  gettingNewPoem = false;
+  gsap.to(".ganjoor-m1", { opacity: 1 });
+  gsap.to(".ganjoor-m2", { opacity: 1 });
+  gsap.to(".ganjoor-poet", { opacity: 1 });
 };
 const hidePoems = () => {
-  gsap.to("#m1", { opacity: 0 });
-  gsap.to("#m2", { opacity: 0 });
-  gsap.to("#poet", { opacity: 0 });
+  gsap.to(".ganjoor-m1", { opacity: 0 });
+  gsap.to(".ganjoor-m2", { opacity: 0 });
+  gsap.to(".ganjoor-poet", { opacity: 0 });
 };
 const setPoem = () => {
   m1.innerHTML = poem.m1;
@@ -73,42 +67,5 @@ const setPoem = () => {
   poet.setAttribute("href", poem.url)
 };
 
-
-const getPoem = async () => {
-
-  const url = `https://c.ganjoor.net/beyt-xml.php?n=1${poetSelectorEl.value > 0 ? `&p=${poetSelectorEl.value}` : ''}`;
-  // Make a request for a user with a given ID
-  fetch(url,{ method: "GET", mode: 'no-cors', headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':  '*'}})
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.text();
-    })
-    .then(xmlText => {
-      const parser = new DOMParser();
-      const xmlResult = parser.parseFromString(xmlText,
-        'text/xml');
-      poem = {
-        m1: xmlResult.getElementsByTagName('m1')
-        [0].textContent,
-        m2: xmlResult.getElementsByTagName('m2')
-        [0].textContent,
-        poet: xmlResult.getElementsByTagName('poet')
-        [0].textContent,
-        url: xmlResult.getElementsByTagName('url')
-        [0].textContent,
-      };
-      document.title = "یک بیت شعر از " + poem.poet;
-      setPoem();
-    })
-    .catch(error => {
-      console.error(`There was a problem with
-                       the fetch operation:`, error);
-    });
-
-};
-
-getPoem();
 
 setTimeout(onLogoHover, 10000)
