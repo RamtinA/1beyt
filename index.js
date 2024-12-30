@@ -43,7 +43,20 @@ const onLogoLeave = (event) => {
 const onLogoClick = (event) => {
   event.preventDefault();
   hidePoems();
-  setTimeout(()=>{window.location.reload()}, 500)
+  const scriptTag = document.getElementById('ganjoor-script');
+const value="newvalue";
+    if (scriptTag) {
+        const newScript = document.createElement('script');
+        [...scriptTag.attributes].forEach(attr => {
+            newScript.setAttribute(attr.name, attr.value);
+        });
+        newScript.src = "https://c.ganjoor.net/beyt.php?block=ganjoor-block&p=" + poetSelectorEl.value;
+        // Remove the old script and append the new one
+        const parent = scriptTag.parentNode;
+        parent.removeChild(scriptTag);
+        parent.appendChild(newScript);
+    }
+  // setTimeout(()=>{window.location.reload()}, 500)
 };
 logoEl.addEventListener("mouseenter", onLogoHover);
 logoEl.addEventListener("mouseout", onLogoLeave);
