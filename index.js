@@ -78,7 +78,7 @@ const getPoem = async () => {
 
   const url = `https://c.ganjoor.net/beyt-xml.php?n=1${poetSelectorEl.value > 0 ? `&p=${poetSelectorEl.value}` : ''}`;
   // Make a request for a user with a given ID
-  fetch(url,{ method: "GET", mode: 'cors', headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':  '*'}})
+  fetch(url,{ method: "GET", mode: 'no-cors', headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':  '*'}})
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
